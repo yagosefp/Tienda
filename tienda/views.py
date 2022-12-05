@@ -5,7 +5,7 @@ from .models import Tipo,Producto
 # Create your views here.
 
 def tproductos(request):
-    productos =Producto.objects.all()
+    productos =Producto.productos.all()
     return render(request, 'tienda/home.html', {'productos': productos})
 
 def tipos(request):

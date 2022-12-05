@@ -2,6 +2,12 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 
+
+
+class ProductoManager(models.Manager):
+    def get_queryset(self):
+        return super(ProductoManager, self).get_queryset().filter(is_active=True)
+
 class Tipo(models.Model):
     name = models.CharField(max_length=255, db_index=True)
     slug = models.SlugField(max_length=255, unique=True)
@@ -26,6 +32,8 @@ class Producto(models.Model):
     is_active = models.BooleanField(default=True)
     creado = models.DateTimeField(auto_now_add=True)
     modificado = models.DateTimeField(auto_now=True)
+    objects = models.Manager()
+    productos = ProductoManager()
    
     
 
