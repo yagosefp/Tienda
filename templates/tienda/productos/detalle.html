@@ -31,8 +31,9 @@
                                 </select>
 
                             </div>
-                            <div class="col-6 text-end"><button type="button" class="btn btn-secondary btn-sm">Añadir al 
-                                    carro</button></div>
+                            <div class="col-6 text-end">
+                                <button type="button" id="add-button" value="{{producto.id}}" class="btn btn-secondary btn-sm">Añadir al carro</button></div>
+                                  
                         </div>
                     </div>
                 </div>
@@ -41,4 +42,25 @@
     </main>
 
 </div>
+<script>
+    $(document).on('click', '#add-button', function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: '{% url "carrito:carrito_add" %}',
+            data: {
+                productoid: $('#add-button').val(),
+                productcant: $('#select option:selected').text(),
+                csrfmiddlewaretoken: "{{csrf_token}}",
+                action: 'post'
+            },
+            success: function (json) {
+               document.getElementById("carrito_cant").innerHTML = json.cant
+            },
+            error: function (xhr, errmsg, err) {}
+        });
+    })
+</script>
+
+
 {% endblock %}
