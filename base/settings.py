@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-138tn9jtma_%0%i+s$lyn7vkr$h=-m#++38nj2se=k8r2t9y&k
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['yourdomain.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'tienda',
     'carrito',
+    'account',
+    'orders',
 ]
 
 MIDDLEWARE = [
@@ -117,14 +119,26 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static")
+]
 
+
+CARRITO_SESSION_ID = 'carrito'
+
+PUBLISHABLE_KEY = 'pk_test_51MC0gKBbI7O9XQcTrVxaBFuN6TtCQZL41HYhN2XBugqznJfunv9yVSgvfLzfwxE5x4zVcuHygXfVl2JBeGeJrXqm00bRQ5cteX'
+SECRET_KEY = 'sk_test_51MC0gKBbI7O9XQcTqRMvT3tLAYCRM4N3cLdApW6Jgq7A8JnaEbxUNrLFneKboUKQU3WOmtzDGLWVVTwp8yzfrDJG00GYchcaBb'
+STRIPE_ENDPOINT_SECRET = 'whsec_950a432aa44ae283d77d9b2c7888df2dda7fd88151f03041386e6390e138772a'
+
+
+AUTH_USER_MODEL = 'account.UserBase'
+LOGIN_REDIRECT_URL = '/account/dashboard'
+LOGIN_URL = '/account/login/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

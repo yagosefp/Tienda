@@ -6,7 +6,7 @@ from .carrito import Carrito
 
 def carrito_m (request):
     carrito=Carrito(request)
-    return render(request,'tienda/carrito/muestra.html',{'carrito':carrito})
+    return render(request,'carrito/muestra.html',{'carrito':carrito})
 
 def carrito_add(request):
     carrito = Carrito(request)
@@ -28,7 +28,7 @@ def carrito_elim(request):
 
         carritocant = carrito.__len__()
         carritototal = carrito.get_total_precio()
-        response = JsonResponse({'cant': carritocant, 'subtotal': carritototal})
+        response = JsonResponse({'cant': carritocant, 'total': carritototal})
         return response
 
 
@@ -41,5 +41,5 @@ def carrito_actu(request):
 
         carritocant = carrito.__len__()
         carritototal = carrito.get_total_precio()
-        response = JsonResponse({'cant': carritocant, 'subtotal': carritototal})
+        response = JsonResponse({'cant': carritocant, 'total': carritototal})
         return response

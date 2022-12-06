@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
 from django.urls import reverse
 
 
@@ -22,7 +22,7 @@ class Tipo(models.Model):
     
 class Producto(models.Model):
     tipo = models.ForeignKey(Tipo, related_name='producto', on_delete=models.CASCADE)
-    creador =models.ForeignKey(User, on_delete=models.CASCADE ,related_name='creador_producto')
+    creador =models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE ,related_name='creador_producto')
     nombre = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     image = models.ImageField(upload_to='images/')
