@@ -12,7 +12,7 @@
         <h1 class="h1 fw-bold">Plantas</h1>
         <p class="lead text-muted">Busca y compra tipos de plantas diferentes</p>
         <p>
-          <a href="#" class="btn btn-primary my-2">Crea una cuenta</a>
+          <a href="{% url "account:login" %}" class="btn btn-primary my-2">Crea una cuenta</a>
         </p>
       </div>
     </div>
@@ -34,7 +34,7 @@
                 <a class="text-dark text-decoration-none" href="{{ producto.get_absolute_url }}">{{ producto.nombre }}</a>
               </p>
               <div class="d-flex justify-content-between align-items-center">
-                <small class="text-muted">plantas</small>
+                <small class="text-muted">Haz click para ir al articulo</small>
               </div>
             </div>
           </div>
