@@ -1,6 +1,8 @@
 
 from decimal import Decimal
 
+from django.conf import settings
+
 from tienda.models import Producto
 
 class Carrito():
@@ -8,9 +10,9 @@ class Carrito():
 
     def __init__(self, request):
         self.session = request.session
-        carrito = self.session.get('key')
-        if 'key' not in request.session:
-            carrito = self.session['key'] = {}
+        carrito = self.session.get(settings.CARRITO_SESSION_ID)
+        if settings.CARRITO_SESSION_ID not in request.session:
+            carrito = self.session[settings.CARRITO_SESSION_ID] = {}
         self.carrito = carrito
 
     def add(self, producto, cant):
@@ -41,7 +43,7 @@ class Carrito():
 
         for item in carrito.values():
             item['precio'] = Decimal(item['precio'])
-            item['total_precio'] = item['precio'] * item['cant']
+            item['total_precio'] =  item['precio'] * item['cant']
             yield item
 
 
@@ -54,7 +56,10 @@ class Carrito():
         self.save()
 
     def get_total_precio(self):
-        return sum(Decimal(item['precio']) * item['cant'] for item in self.carrito.values())
+        total =sum(Decimal(item['precio']) * item['cant'] for item in self.carrito.values())
+        return total
+
+  
 
     def elim(self, producto):
       
@@ -64,6 +69,10 @@ class Carrito():
             del self.carrito[producto_id]
             print(producto_id)
             self.save()
+
+    def clear(self):
+        del self.session[settings.CARRITO_SESSION_ID]
+        self.save()
 
     def save(self):
         self.session.modified = True

@@ -31,7 +31,7 @@ def CarritoView(request):
 
     stripe.api_key = 'sk_test_51MC0gKBbI7O9XQcTqRMvT3tLAYCRM4N3cLdApW6Jgq7A8JnaEbxUNrLFneKboUKQU3WOmtzDGLWVVTwp8yzfrDJG00GYchcaBb'
     intent = stripe.PaymentIntent.create(
-        amount=total,
+        amount=total*100,
         currency='eur',
         metadata={'userid': request.user.id}
     )

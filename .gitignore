@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+*.pot
+*.log
+*.po
+
+.venv/
+venv/
+
+.pytestcache

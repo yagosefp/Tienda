@@ -63,7 +63,7 @@
                                     d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
                             </svg>
                         </div>
-                        <span class="fs15 fw500">Shop</span>
+                        <span class="fs15 fw500">Tienda</span>
                     </button>
 
                     {% if user.is_authenticated %}
@@ -94,7 +94,7 @@
                     {% endif %}
 
 
-                    <a type="button" role="button" href="#" class="btn btn-outline-secondary border-0 carrito-btn">
+                    <a type="button" role="button" href="{% url "account:dashboard" %}" class="btn btn-outline-secondary border-0 carrito-btn">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
                                 class="bi bi-person" viewBox="0 0 16 16">

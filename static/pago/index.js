@@ -36,6 +36,7 @@ ev.preventDefault();
 
 var custName = document.getElementById("custName").value;
 var direc = document.getElementById("direc").value;
+var direc2 = document.getElementById("direc2").value;
 var postal = document.getElementById("postal").value;
 
 
@@ -51,11 +52,12 @@ var postal = document.getElementById("postal").value;
       console.log(json.success)
 
       stripe.confirmCardPayment(clientsecret, {
-        pago_method: {
+        payment_method: {
           card: card,
           billing_details: {
-            direccion:{
-                line:direc,
+            address:{
+                line1:direc,
+                line2:direc2
             },
             name: custName
           },
@@ -65,7 +67,7 @@ var postal = document.getElementById("postal").value;
           console.log('error')
           console.log(result.error.message);
         } else {
-          if (result.pagoIntent.status === 'succeeded') {
+          if (result.paymentIntent.status === 'succeeded') {
             console.log('Pago admitido')
             // Puede romper si se cierra la ventana muy pronto
             
